@@ -3,7 +3,22 @@ package protest.entities;
 // Something for sale.
 public class Product
 {
-	public String id;
-	public String sku;
-	public String description;
+	String id;
+	String sku;
+	String description;
+
+	public String getId()
+	{
+		return id;
+	}
+
+	public String getSku()
+	{
+		return sku;
+	}
+
+	public String getDescription()
+	{
+		return description;
+	}
 }

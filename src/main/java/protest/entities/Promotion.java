@@ -6,6 +6,22 @@ import java.util.Map;
 // A map of product IDs to discount prices.
 public class Promotion
 {
-	public String code;
-	public Map<String,BigDecimal> discounts;
+	String id;
+	String code;
+	Map<String,BigDecimal> discounts;
+
+	public String getId()
+	{
+		return id;
+	}
+
+	public String getCode()
+	{
+		return code;
+	}
+
+	public Map<String,BigDecimal> getDiscounts()
+	{
+		return discounts;
+	}
 }

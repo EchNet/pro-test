@@ -5,7 +5,22 @@ import java.math.BigDecimal;
 // A purchased Product, its purchase price, and an optional Promotion.
 public class Item
 {
-	public Product product;
-	public BigDecimal price;
-	public String promotionCode;
+	Product product;
+	BigDecimal price;
+	String promotionId;
+
+	public Product getProduct()
+	{
+		return product;
+	}
+
+	public BigDecimal getPrice()
+	{
+		return price;
+	}
+
+	public String getPromotionId()
+	{
+		return promotionId;
+	}
 }
