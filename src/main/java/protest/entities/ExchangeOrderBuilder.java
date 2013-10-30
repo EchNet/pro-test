@@ -58,7 +58,7 @@ public class ExchangeOrderBuilder implements Builder<ExchangeOrder>
 	@Override
 	public ExchangeOrder build()
 	{
-		if (id == null || customer == null || priorOrderId == null || returnedItems.isEmpty()) {
+		if (id == null || customer == null || items.isEmpty() || priorOrderId == null || returnedItems.isEmpty()) {
 			throw new IllegalStateException();
 		}
 		ExchangeOrder exchangeOrder = new ExchangeOrder();
