@@ -13,19 +13,8 @@ import protest.entities.PromotionBuilder;
 
 public class MockPricingSystem implements PricingSystem
 {
-	private Map<String,Product> skus = new HashMap<String,Product>();
 	private Map<String,BigDecimal> prices = new HashMap<String,BigDecimal>();
 	private List<Promotion> promotions = new ArrayList<Promotion>();
-
-	public void addSku(String sku, String productId, String description)
-	{
-		skus.put(sku, new ProductBuilder().setSku(sku).setId(productId).setDescription(description).build());
-	}
-
-	public Product getSku(String sku)
-	{
-		return skus.get(sku);
-	}
 
 	public void addPrice(String productId, BigDecimal price)
 	{
