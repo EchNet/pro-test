@@ -1,8 +1,10 @@
 package protest.resources;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import protest.entities.Customer;
 import protest.entities.Product;
 import protest.entities.ProductBuilder;
@@ -11,46 +13,55 @@ import protest.entities.PromotionBuilder;
 
 public class MockPricingSystem implements PricingSystem
 {
-	public final static String PROMOTION_ID = "promotion";
-	public final static Product UNPROMOTED_PRODUCT = mockProduct("unpromoted");
-	public final static Product PROMOTED_PRODUCT = mockProduct("promoted");
-	public final static BigDecimal UNPROMOTED_PRICE = BigDecimal.valueOf(10);
-	public final static BigDecimal PROMOTED_PRICE_0 = BigDecimal.valueOf(8);
-	public final static BigDecimal PROMOTED_PRICE_1 = BigDecimal.valueOf(9);
+	private Map<String,Product> skus = new HashMap<String,Product>();
+	private Map<String,BigDecimal> prices = new HashMap<String,BigDecimal>();
+	private List<Promotion> promotions = new ArrayList<Promotion>();
+
+	public void addSku(String sku, String productId, String description)
+	{
+		skus.put(sku, new ProductBuilder().setSku(sku).setId(productId).setDescription(description).build());
+	}
+
+	public Product getSku(String sku)
+	{
+		return skus.get(sku);
+	}
+
+	public void addPrice(String productId, BigDecimal price)
+	{
+		prices.put(productId, price);
+	}
+
+	public void addPromotion(String productId, BigDecimal price)
+	{
+		Promotion promotion = new PromotionBuilder()
+			.setId(productId + "-promotion-" + promotions.size())
+			.setCode("promo")
+			.addDiscount(productId, price)
+			.build();
+		promotions.add(promotion);
+	}
+
+	public void clearPromotions()
+	{
+		promotions.clear();
+	}
 
 	@Override
 	public BigDecimal getPrice(String productId)
 	{
-		return UNPROMOTED_PRICE;
+		return prices.get(productId);
 	}
 
 	@Override
 	public List<Promotion> getActivePromotions(Customer customer)
 	{
-		return Arrays.asList(new Promotion[] { mockPromotion(PROMOTED_PRICE_0), mockPromotion(PROMOTED_PRICE_1) });
+		return promotions;
 	}
 
 	@Override
 	public Promotion getPromotion(String promotionCode)
 	{
-		return mockPromotion(PROMOTED_PRICE_0);
-	}
-
-	private Promotion mockPromotion(BigDecimal price)
-	{
-		return new PromotionBuilder()
-			.setId(PROMOTION_ID)
-			.setCode(PROMOTION_ID)
-			.addDiscount(PROMOTED_PRODUCT.getId(), price)
-			.build();
-	}
-
-	private static Product mockProduct(String name)
-	{
-		return new ProductBuilder()
-			.setId(name)
-			.setSku(name)
-			.setDescription(name)
-			.build();
+		return null;
 	}
 }

@@ -18,6 +18,8 @@ staff.
 
 *Order:* A purchase.  Has a Customer and a list of purchased Items.
 
+*ExchangeOrder:* A purchase made in exchange for one or more returned items.
+
 *Item:* A purchased Product, its purchase price, and an optional Promotion.
 
 *Promotion:* A map of product IDs to discount prices.
